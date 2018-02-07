@@ -1,0 +1,39 @@
+####
+# ATENTION:
+# Replace all occurences of gav with your project's name
+####
+
+# v2 syntax
+version: '2'
+
+# Named volumes
+volumes:
+  # MySQL Data
+  gav-mysql-data:
+    driver: local
+
+services:
+  # MySQL (5.7)
+  mysql:
+    image: ambientum/mysql:5.7
+    container_name: gav-mysql
+    volumes:
+      - gav-mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=gav
+      - MYSQL_DATABASE=gav
+      - MYSQL_USER=gav
+      - MYSQL_PASSWORD=gav
+
+  # PHP (with Caddy)
+  app:
+    image: ambientum/php:7.2-nginx
+    container_name: gav-app
+    volumes:
+      - .:/var/www/app
+    ports:
+      - "80:8080"
+    links:
+      - mysql
