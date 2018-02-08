@@ -13,6 +13,10 @@ Dentro do container execute
 e rode as migrations
 
         php artisan migrate
+
+e crie um link público para a pasta storage, para que as imagens apareçam
+
+        php artisan storage:link
         
 Ao executar os comando acima, o projeto estará disponível em
 
