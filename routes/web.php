@@ -1,6 +1,9 @@
 <?php
 
-Route::get('/', 'EstoqueController@index');
+Route::get('/', function() {
+    return redirect()
+        ->route('produtos.index');
+});
 Route::resource('produtos', 'ProdutoController',  ['except' => [
     'show'
 ]]);
